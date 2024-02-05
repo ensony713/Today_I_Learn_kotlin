@@ -11,8 +11,8 @@ var height: Int = 0
 
 fun dfs(x: Int, y: Int,) {
 
-    var nx = x
-    var ny = y
+    var nx: Int
+    var ny: Int
     for (i in 0 .. 3) {
 
         nx = dx[i] + x
