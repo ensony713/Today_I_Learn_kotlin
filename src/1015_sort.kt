@@ -5,16 +5,23 @@ fun main () {
 
     val br = BufferedReader(InputStreamReader(System.`in`))
     val n = br.readLine().toInt()
-    val arr = Array(n) { Pair(0, 0) }
+    val arr = mutableMapOf<Int, Int>()
     val origin = Array(n) { 0 }
+    val result = Array(n) { 0 }
+
     br.readLine().split(" ").forEachIndexed{ index, item ->
-        arr[index] = Pair(index, item.toInt())
         origin[index] = item.toInt()
+        arr[index] = item.toInt()
     }
 
-    arr.sortWith(compareBy { it.second })
+    val sorted = arr.toList().sortedWith(compareBy { it.second }).toMap()
 
-    origin.forEachIndexed { index, it ->
-        print("${arr[it]} ")
+    var i = 0
+    sorted.forEach{
+        result[it.key] = i++
+    }
+
+    result.forEach{
+        print("$it ")
     }
 }
