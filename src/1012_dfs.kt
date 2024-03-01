@@ -5,7 +5,7 @@ val dx = arrayOf( 0, 1, 0, -1 )
 val dy = arrayOf( 1, 0, -1, 0 )
 
 var map = Array(51) { Array(51) { false } }
-var visited = Array(51) { Array(51) { false } }
+private var visited = Array(51) { Array(51) { false } }
 var width: Int = 0
 var height: Int = 0
 
