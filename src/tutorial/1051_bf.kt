@@ -5,37 +5,20 @@ import java.io.InputStreamReader
 
 val board = Array(55) { Array(55) { -1 } }
 
-data class Node(val x: Int, val y: Int)
+fun maxSquare(x: Int, y: Int, width: Int, n: Int, m: Int): Int {
 
-fun maxSquare(node01: Node, node02: Node, n: Int, m: Int): Int {
-    var max = 0
-    val key = board[node01.x][node02.y]
-    val nodes = mutableListOf<Node>()
+    val key = board[x][y]
 
-    for (i in n - 1 downTo 0) {
-        var cnt = 0
-        for (j in m - 1 downTo 0) {
-            if (board[i][j] == key) {
-                ++cnt
-                nodes.add(Node(i, j))
-            }
-        }
-
-        var check = false
-        if (cnt > 2) {
-            for (node in nodes) {
-                if (node.y == node02.y) {
-                    check = true
-                }
-                if (node.y == node01.y && check) {
-                    val size = (node02.y - node01.y) * (node.x - node01.x)
-                    max = if (max > size) max else size
-                }
-            }
-        }
+    if (x + width > n) {
+        return 0
     }
 
-    return max
+    val w = if (width - 1 > 0) width - 1 else 1
+    if (board[x + w][y] == key && board[x + w][y + w] == key) {
+        return width * width
+    }
+
+    return 0
 }
 
 fun main() {
@@ -52,23 +35,24 @@ fun main() {
         }
     }
 
-    var node01: Node
-    var node02: Node
-    var cnt: Int
-    var max = 0
+    var max = 1
     for (i in 0 ..< size[0] ){
-        for (k in 0 .. 9) {
-            cnt = 0
-            for (j in 0 ..< size[1]) {
-                if (board[i][j] == k) {
-                    cnt++
-                }
-                //  같은 위치 조합을 언제 다 해보지...?
 
-                if (cnt >= 2) {
-                    //val tmp = maxSquare(node01, node02, size[0], size[1])
+        for (j in 0 ..< size[1]) {
+            for (k in j ..< size[1]) {
+
+                if (board[i][j] == board[i][k]) {
+
+                    val tmp = maxSquare(i, j, k - j + 1, size[0], size[1])
+
+                    println("board[$i][$j], board[$i][$k] = ${board[i][j]} = area $tmp")
+                    max = if (max < tmp) tmp else max
                 }
             }
         }
     }
+
+    println(max)
+
+    //println(maxSquare(2, 0, 3, size[0], size[1]))
 }

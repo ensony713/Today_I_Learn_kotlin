@@ -1,15 +1,15 @@
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-val dx = arrayOf( 0, 1, 0, -1 )
-val dy = arrayOf( 1, 0, -1, 0 )
+private val dx = arrayOf( 0, 1, 0, -1 )
+private val dy = arrayOf( 1, 0, -1, 0 )
 
-var map = Array(51) { Array(51) { false } }
-var visited = Array(51) { Array(51) { false } }
-var width: Int = 0
-var height: Int = 0
+private var map = Array(51) { Array(51) { false } }
+private var visited = Array(51) { Array(51) { false } }
+private var width: Int = 0
+private var height: Int = 0
 
-fun dfs(x: Int, y: Int) {
+private fun dfs(x: Int, y: Int) {
 
     var nx: Int
     var ny: Int
